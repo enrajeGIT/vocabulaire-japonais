@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 
 export default function App() {
   const [vocabulaire, setVocabulaire] = useState([]);
@@ -41,37 +39,59 @@ export default function App() {
   };
 
   return (
-    <div className="p-6 space-y-4 max-w-md mx-auto">
-      <Card className={feedback ? "border-green-400 ring-2 ring-green-300 transition-all duration-300" : ""}>
-        <CardContent className="text-center p-6 space-y-4">
-          <h1 className="text-3xl font-bold">{motActuel.mot}</h1>
-          {showTranscription && <p className="text-gray-600">{motActuel.transcription}</p>}
-          <div className="grid grid-cols-1 gap-2">
-            {melange.map((mot, i) => (
-              <Button
-                key={i}
-                variant={selected === mot ? (feedback ? "default" : "destructive") : "outline"}
-                onClick={() => verifier(mot)}
-                disabled={selected !== null}
-              >
-                {mot}
-              </Button>
-            ))}
-          </div>
-          {selected && !feedback && (
-            <p className="text-green-600 font-semibold">Bonne réponse : {motActuel.traduction}</p>
-          )}
-          {selected && feedback && (
-            <p className="text-green-600 font-semibold">✅ Bonne réponse !</p>
-          )}
-          <div className="flex justify-between pt-4">
-            <Button onClick={() => setShowTranscription(!showTranscription)} variant="ghost">
-              {showTranscription ? "Masquer" : "Afficher"} transcription
-            </Button>
-            <Button onClick={suivant}>Suivant</Button>
-          </div>
-        </CardContent>
-      </Card>
+    <div style={{ padding: "2rem", maxWidth: "500px", margin: "0 auto", fontFamily: "sans-serif" }}>
+      <div
+        style={{
+          border: "1px solid #ccc",
+          borderRadius: "8px",
+          padding: "2rem",
+          backgroundColor: feedback ? "#e6ffed" : "#fff",
+          boxShadow: feedback ? "0 0 10px rgba(72, 187, 120, 0.5)" : "none"
+        }}
+      >
+        <h1 style={{ fontSize: "2rem", marginBottom: "1rem" }}>{motActuel.mot}</h1>
+        {showTranscription && (
+          <p style={{ color: "#555", marginBottom: "1rem" }}>{motActuel.transcription}</p>
+        )}
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+          {melange.map((mot, i) => (
+            <button
+              key={i}
+              onClick={() => verifier(mot)}
+              disabled={selected !== null}
+              style={{
+                padding: "0.5rem 1rem",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
+                backgroundColor:
+                  selected === mot
+                    ? feedback
+                      ? "#4CAF50"
+                      : "#f44336"
+                    : "#f0f0f0",
+                color: selected === mot ? "white" : "black",
+                cursor: "pointer"
+              }}
+            >
+              {mot}
+            </button>
+          ))}
+        </div>
+        {selected && !feedback && (
+          <p style={{ color: "green", fontWeight: "bold", marginTop: "1rem" }}>
+            Bonne réponse : {motActuel.traduction}
+          </p>
+        )}
+        {selected && feedback && (
+          <p style={{ color: "green", fontWeight: "bold", marginTop: "1rem" }}>✅ Bonne réponse !</p>
+        )}
+        <div style={{ display: "flex", justifyContent: "space-between", marginTop: "1.5rem" }}>
+          <button onClick={() => setShowTranscription(!showTranscription)}>
+            {showTranscription ? "Masquer" : "Afficher"} transcription
+          </button>
+          <button onClick={suivant}>Suivant</button>
+        </div>
+      </div>
     </div>
   );
 }
