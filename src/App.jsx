@@ -96,3 +96,5 @@ console.log(\"Vocabulaire chargé:\", vocabulaire);
     </div>
   );
 }
+export default App;
+
