@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function App() {
+export default  App() {
   const [vocabulaire, setVocabulaire] = useState([]);
   const [index, setIndex] = useState(0);
   const [showTranscription, setShowTranscription] = useState(false);
