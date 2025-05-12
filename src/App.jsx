@@ -15,6 +15,7 @@ export default function App() {
         setIndex(Math.floor(Math.random() * data.length));
       });
   }, []);
+console.log(\"Vocabulaire chargé:\", vocabulaire);
 
   if (vocabulaire.length === 0) {
     return <div className="p-6 text-center">Chargement...</div>;
